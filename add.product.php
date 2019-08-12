@@ -1,0 +1,198 @@
+<?php
+include_once("base.php");
+require_once('./Include/product.php');
+$title = 'Add Product';
+include_once("Database/db.php");
+include_once("header.php");
+?>
+<?php
+
+$t = date("H");
+if ($title !== 'እንኳን ደህና መጣችሁ') {
+    if ($t < "20") {
+        echo ' <div class="welcome">
+<p class="px-2">መልካም ቀን,';
+    } else {
+        echo ' <div class="welcome">
+<p class="px-2">እንደምን ዋላችሁ,';
+    }
+    ?>
+    <span><?php echo $_SESSION['firstname']; ?></span></p>
+    <a class="px-2" href="Include/logout.php" style=" background: grey;">Disconnect</a>
+    </div>
+<?php } ?>
+<!-- ADD PRODUCT -->
+<?php
+
+
+
+?>
+<?php
+
+$name = null;
+$price = null;
+$color = null;
+$storage = null;
+$Admin_id = null;
+$img = null;
+$Stages_id = null;
+
+if (!empty($_POST)) {
+    $name = $_POST['name'];
+    $price = $_POST['price'];
+    $color = strip_tags($_POST['color'], '<strong>');
+    $storage = $_POST['storage'];
+    $Admin_id = $_POST['Admin_id'];
+    $Stages_id = $_POST['Stages_id'];
+    // $img = $_FILES['img'];
+    // $tmp_dir = $_FILES['img']['tmp_name'];
+    // $upload_dir = 'upload/img/';
+    // $imgExt = strtolower(pathinfo($img,PATHINFO_EXTENSION));
+    // $valid_extensions = array('jpeg','jpg','png','gif','pdf');
+    // $picImg = rand(1000,1000000).".".$imgExt;
+    // move_uploaded_file($tmp_dir, $upload_dir.$picImg);
+    $folder = "upload/img/";
+
+    $img = $_FILES['img']['name'];
+
+    $path = $folder . $img;
+
+    $target_file = $folder . basename($_FILES["img"]["name"]);
+
+
+    $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+
+
+    $allowed = array('jpeg', 'png', 'jpg');
+    $filename = $_FILES['img']['name'];
+
+    $ext = pathinfo($filename, PATHINFO_EXTENSION);
+    if (!in_array($ext, $allowed)) {
+
+        echo "Sorry, only JPG, JPEG, PNG & GIF  files are allowed.";
+    } else {
+
+        move_uploaded_file($_FILES['img']['tmp_name'], $path);
+
+
+
+        $errors = [];
+        if (empty($name)) {
+            $errors['name'] = '\'not valid';
+        }
+
+        if (empty($price)) {
+            $errors['price'] = '\'not valid';
+        }
+
+        if (empty($storage)) {
+            $errors['storage'] = '\'not valid';
+        }
+
+        if (empty($Admin_id)) {
+            $errors['Admin_id'] = '\'not valid';
+        }
+
+        if (empty($img)) {
+            $errors['img'] = '\'not valid';
+        }
+        if (empty($errors)) {
+            $query = $DB_con->prepare('INSERT INTO product (name,price,color,storage,Admin_id,img,Stages_id) VALUES (:name, :price, :color, :storage, :Admin_id, :img, :Stages_id)');
+            $query->bindParam(':name', $name);
+            $query->bindParam(':price', $price);
+            $query->bindParam(':color', $color);
+            $query->bindParam(':storage', $storage);
+            $query->bindParam(':Admin_id', $Admin_id);
+            $query->bindParam(':img', $img);
+            $query->bindParam(':Stages_id', $Stages_id);
+
+
+
+
+            if ($query->execute()) {
+                echo '<div class="alert alert-success">Product added.</div>';
+                ?>
+                <script>window.location.href="admin.php";</script>
+                <?php
+            }
+        }
+    }
+}
+?>
+
+<div class="container my-5">
+    <?php
+    // S'il y a des erreurs
+    if (!empty($errors)) {
+        echo '<div class="alert alert-danger">';
+        echo '<p>Errors</p>';
+        echo '<ul>';
+        foreach ($errors as $field => $error) {
+            echo '<li>' . $field . ' : ' . $error . '</li>';
+        }
+        echo '</ul>';
+        echo '</div>';
+    }
+    ?>
+
+    <div class="container">
+        <form action="#" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="formGroupExampleInput">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+            </div>
+
+            <div class="form-group">
+                <label for="formGroupExampleInput">Storage</label>
+                <input type="text" class="form-control" id="storage" name="storage" placeholder="Storage">
+            </div>
+
+            <div class="form-group">
+                <label for="formGroupExampleInput">Color</label>
+                <input type="text" class="form-control" id="color" name="color" placeholder="Color">
+            </div>
+
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Price</label>
+                <input type="text" class="form-control" id="price" name="price" placeholder="Price">
+            </div>
+            <?php
+            $query = $DB_con->prepare('SELECT * FROM `admin`');
+            $query->execute();
+            $admins = $query->fetchAll();
+            ?>
+
+            <div class="form-group">
+                <label for=",exampleFormControlSelect1">Admin_Id</label>
+                <select class="form-control" name="Admin_id" id="exampleFormControlSelect1">
+                    <?php
+                    foreach ($admins as $admin) {
+                        ?>
+                        <option><?php echo $admin['id']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+
+            <?php
+            $query = $DB_con->prepare('SELECT * FROM `stages` WHERE `id`');
+            $query->execute();
+            $stages = $query->fetchAll();
+            ?>
+
+            <div class="form-group">
+                <label for=",exampleFormControlSelect1">Condition</label>
+                <select class="form-control" name="Stages_id" id="exampleFormControlSelect1">
+                    <?php foreach ($stages as $stage) { ?>
+                        <option><?php echo $stage['id']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Image</label>
+                <input type="file" class="form-control-file" name="img" id="exampleFormControlFile1">
+            </div>
+            <input type="submit" name="submit" value="Add Product" />
+
+        </form>
+    </div>
+</div>

@@ -20,7 +20,25 @@ if(empty($email) || empty($pass)) {
       $_SESSION['firstname'] = $row['firstname'];
       
 
-      header('location:main.php');
+      header('location:admin.php');
+      echo($email);
+    } else {
+      $message = '<span style="background-color:red;color:white;">Email/Password is wrong</span>';
+      echo($message);
+ 
+    }
+
+    $query = $DB_con->prepare("SELECT email, password, firstname FROM users WHERE 
+    email=? AND password=? ");
+    $query->execute(array($email,$pass));
+    $row = $query->fetch(PDO::FETCH_BOTH);
+    
+    if($query->rowCount() > 0) {
+      $_SESSION['email'] = $email;
+      $_SESSION['firstname'] = $row['firstname'];
+      
+
+      header('location:user.php');
       echo($email);
     } else {
       $message = '<span style="background-color:red;color:white;">Email/Password is wrong</span>';

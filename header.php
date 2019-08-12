@@ -3,6 +3,7 @@
 include_once("Database/db.php");
 include_once("base.php");
 ?>
+
 <body>
     <div class="header">
         <div class="logo">

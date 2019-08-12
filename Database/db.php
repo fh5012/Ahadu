@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-  var_dump($_SESSION);
+//   var_dump($_SESSION);
 
  header('content-type: text/html; charset=uft-8');
 $DB_host = "localhost";
