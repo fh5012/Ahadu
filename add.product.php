@@ -36,6 +36,7 @@ $storage = null;
 $Admin_id = null;
 $img = null;
 $Stages_id = null;
+$Category_id = null;
 
 if (!empty($_POST)) {
     $name = $_POST['name'];
@@ -44,6 +45,7 @@ if (!empty($_POST)) {
     $storage = $_POST['storage'];
     $Admin_id = $_POST['Admin_id'];
     $Stages_id = $_POST['Stages_id'];
+    $Category_id =$_POST['Category_id'];
     // $img = $_FILES['img'];
     // $tmp_dir = $_FILES['img']['tmp_name'];
     // $upload_dir = 'upload/img/';
@@ -93,11 +95,15 @@ if (!empty($_POST)) {
             $errors['Admin_id'] = '\'not valid';
         }
 
+        if (empty($Category_id)) {
+            $errors['Category_id'] = '\'not valid';
+        }
+
         if (empty($img)) {
             $errors['img'] = '\'not valid';
         }
         if (empty($errors)) {
-            $query = $DB_con->prepare('INSERT INTO product (name,price,color,storage,Admin_id,img,Stages_id) VALUES (:name, :price, :color, :storage, :Admin_id, :img, :Stages_id)');
+            $query = $DB_con->prepare('INSERT INTO product (name,price,color,storage,Admin_id,img,Stages_id,Category_id) VALUES (:name, :price, :color, :storage, :Admin_id, :img, :Stages_id, :Category_id)');
             $query->bindParam(':name', $name);
             $query->bindParam(':price', $price);
             $query->bindParam(':color', $color);
@@ -105,8 +111,7 @@ if (!empty($_POST)) {
             $query->bindParam(':Admin_id', $Admin_id);
             $query->bindParam(':img', $img);
             $query->bindParam(':Stages_id', $Stages_id);
-
-
+            $query->bindParam(':Category_id', $Category_id);
 
 
             if ($query->execute()) {
@@ -184,6 +189,21 @@ if (!empty($_POST)) {
                 <select class="form-control" name="Stages_id" id="exampleFormControlSelect1">
                     <?php foreach ($stages as $stage) { ?>
                         <option><?php echo $stage['id']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            
+            <?php
+            $query = $DB_con->prepare('SELECT * FROM `category`');
+            $query->execute();
+            $categorys = $query->fetchAll();
+            ?>
+
+            <div class="form-group">
+                <label for=",exampleFormControlSelect1">Category</label>
+                <select class="form-control" name="Category_id" id="exampleFormControlSelect1">
+                <?php foreach ($categorys as $category) { ?>
+                        <option><?php echo $category['id']; ?></option>
                     <?php } ?>
                 </select>
             </div>

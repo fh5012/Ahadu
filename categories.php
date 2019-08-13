@@ -6,40 +6,38 @@ include_once("Database/db.php");
 include_once("header.php");
 ?>
 <?php
-
-$t = date("H");
-if ($title !== 'እንኳን ደህና መጣችሁ') {
-    if ($t < "20") {
-        echo ' <div class="welcome">
-<p class="px-2">መልካም ቀን,';
-    } else {
-        echo ' <div class="welcome">
-<p class="px-2">እንደምን ዋላችሁ,';
-    }
-    ?>
-    <span><?php echo $_SESSION['firstname']; ?></span></p>
-    <a href="add.product.php"><button type="button" class="btn btn-light">Add Product</button></a>
-    <a class="px-2" href="Include/logout.php" style=" background: grey;">Disconnect</a>
-    </div>
-<?php } ?>
-
-<!-- --------------- CARD ----------------------- -->
-
-<?php 
-    $query = $DB_con->prepare("SELECT * from product");
-    $query->execute();
-    $products = $query->fetchAll();
-?>
-
+  $query = $DB_con->query('SELECT * FROM category');
+  $categories = $query->fetchAll();
+  ?>
+<div class="p-3 mb-2 bg-info text-white">Categories</div>
+<div class="list-group">
+    <?php foreach ($categories as $category) { ?>
+    <a href="categories.php?id=<?php echo $category['id']; ?>"
+        class="list-group-item"><?php echo $category['name']; ?></a>
+    <style>
+        a:nth-of-type(odd) {
+            background-color:#f3f3f3;
+        }
+    </style>
+    <?php } ?>
+</div>
+<?php
+             //Récupérer les films d'une catégorie
+            $idCategory = intval($_GET['id']);
+            $query =  $DB_con->prepare('SELECT * FROM product WHERE Category_id = :Category_id');
+            $query->bindValue(':Category_id',$idCategory);
+            $query->execute();
+            $products = $query->fetchAll();
+          ?>
 <div class="container card">
     <div class="row">
-    <?php foreach ($products as $product){?>
+        <?php foreach ($products as $product){?>
         <div class="col-sm">
             <img class="card-img-top" src="upload/img/<?php echo $product['img']; ?>" alt="<?= $product['name']; ?>">
             <h5 class="card-title"><?php echo $product['name'];?></h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">intersted
-                <span class="badge badge-primary badge-pill">14</span>
+                    <span class="badge badge-primary badge-pill">14</span>
                 </li>
                 <li class="list-group-item"><?php echo $product['storage'];?></li>
                 <li class="font-weight-bold list-group-item"><?php echo $product['color'];?></li>
@@ -52,7 +50,7 @@ if ($title !== 'እንኳን ደህና መጣችሁ') {
                             }    
                             
                             ?>
-            </li>
+                </li>
                 <li class="p-3 mb-2 bg-danger text-white"><?php echo $product['price'];?></li>
             </ul>
             <div class="card-body">
@@ -60,9 +58,6 @@ if ($title !== 'እንኳን ደህና መጣችሁ') {
                 <a href="#" class="card-link">Delete</a>
             </div>
         </div>
-      <?php } ?>
+        <?php } ?>
     </div>
 </div>
-        <hr>
-
-        

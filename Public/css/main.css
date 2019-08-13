@@ -8,8 +8,15 @@ body{
 }
 
 .header{
-    background-color:#f3f3f3;
-    border-bottom:4px solid rgb(95, 48, 48);
+  background: #23074d;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #cc5333, #23074d);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #cc5333, #23074d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  color: white;
+  -webkit-box-shadow: 10px 10px 32px 4px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 32px 4px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 32px 4px rgba(0,0,0,0.75);
+  width: 100%;
 }
 
 .logo img{
