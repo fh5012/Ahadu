@@ -13,8 +13,6 @@ body{
   background: linear-gradient(to right, #cc5333, #23074d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   color: white;
-  -webkit-box-shadow: 10px 10px 32px 4px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 32px 4px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 32px 4px rgba(0,0,0,0.75);
   width: 100%;
 }
@@ -33,10 +31,11 @@ body{
     justify-content:space-between; 
 }
 .welcome p{
-    font-family: din-con; 
-    font-size:1.000em;
+  font-family: din-con;
+    font-size: 1.000em;
     margin: 0;
     margin-top: 0.5rem;
+    font-style: italic;
  } 
 
  a{
@@ -51,6 +50,7 @@ a:hover{
 
 /* card */
 .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius:19px;
   border:1px solid goldenrod;
 } 
@@ -202,6 +202,6 @@ a:hover{
     }
   
    .header h1{
-      font-size: 38px;
+      font-size: 24px;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 include_once("base.php");
 // require_once('./Include/product.php');
-$title = 'Category';
+$title = 'User_Category';
 include_once("Database/db.php");
 include_once("header.php");
 ?>
@@ -11,8 +11,8 @@ include_once("header.php");
   ?>
 <div class="p-3 mb-2 bg-info text-white">Categories</div>
 <div class="list-group">
-    <?php foreach ($categories as $category) { ?>
-    <a href="categories.php?id=<?php echo $category['id']; ?>"
+    <?php foreach ($categories as $category) if($title == 'User_Category'){ ?>
+    <a href="user_categories.php?id=<?php echo $category['id']; ?>"
         class="list-group-item"><?php echo $category['name']; ?></a>
     <style>
         a:nth-of-type(odd) {
@@ -53,10 +53,10 @@ include_once("header.php");
                 </li>
                 <li class="p-3 mb-2 bg-danger text-white"><?php echo $product['price'];?></li>
             </ul>
-            <div class="card-body">
+            <!-- <div class="card-body">
                 <a href="#" class="card-link">Edit</a>
                 <a href="#" class="card-link">Delete</a>
-            </div>
+            </div> -->
         </div>
         <?php } ?>
     </div>

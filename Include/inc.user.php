@@ -1,11 +1,8 @@
 <?php
 require_once('Database/db.php');
-
 if(isset($_POST['submit'])) {
-
     $email = $_POST['email'];
     $pass = $_POST['password'];
-
 if(empty($email) || empty($pass)) {
     $message = '<span style="background-color:red;color:white;">All fields are required</span>';
       echo($message);
@@ -19,7 +16,6 @@ if(empty($email) || empty($pass)) {
       $_SESSION['email'] = $email;
       $_SESSION['firstname'] = $row['firstname'];
       
-
       header('location:admin.php');
       echo($email);
     } else {
@@ -27,7 +23,6 @@ if(empty($email) || empty($pass)) {
       echo($message);
  
     }
-
     $query = $DB_con->prepare("SELECT email, password, firstname FROM users WHERE 
     email=? AND password=? ");
     $query->execute(array($email,$pass));
@@ -37,7 +32,6 @@ if(empty($email) || empty($pass)) {
       $_SESSION['email'] = $email;
       $_SESSION['firstname'] = $row['firstname'];
       
-
       header('location:user.php');
       echo($email);
     } else {
