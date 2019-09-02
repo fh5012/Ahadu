@@ -42,6 +42,8 @@ if(isset($_POST['update']))
     $Category_id =$_POST['Category_id'];   
     $img = $_POST['img']; 
     $img1 = $_POST['img1']; 
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
 
 // $name = null;
 // $price = null;
@@ -121,10 +123,12 @@ if (!empty($_POST)) {
             $errors['img1'] = '\'not valid';
         }
         if (empty($errors)) {
-            $sql = "UPDATE product SET name=:name, price=:price, color=:color, storage=:storage, Admin_id=:Admin_id, img=:img,img1=:img1, Stages_id=:Stages_id, Category_id=:Category_id WHERE id=:id";
+            $sql = "UPDATE product SET name=:name, price=:price, email=:email, phone=:phone, color=:color, storage=:storage, Admin_id=:Admin_id, img=:img,img1=:img1, Stages_id=:Stages_id, Category_id=:Category_id WHERE id=:id";
             $query = $DB_con->prepare($sql);
             $query->bindparam(':id', $id);
             $query->bindparam(':name', $name);
+            $query->bindparam(':phone', $phone);
+            $query->bindparam(':email', $email);
             $query->bindparam(':price', $price);
             $query->bindparam(':color', $color);
             $query->bindparam(':storage', $storage);
@@ -179,6 +183,8 @@ while($row = $query->fetch(PDO::FETCH_ASSOC))
     $Category_id =$row['Category_id'];
     $img = $row['img'];
     $img1 = $row['img1'];
+    $phone = $row['phone'];
+    $email = $row['email'];
 }
 ?>
     <div class="container">
@@ -254,6 +260,14 @@ while($row = $query->fetch(PDO::FETCH_ASSOC))
                 <label for="exampleFormControlFile1">Image</label>
                 <input type="file" class="form-control-file" name="img" value="<?php echo $img;?>" id="exampleFormControlFile1">
                 <input type="file" class="form-control-file" name="img1" value="<?php echo $img1;?>" id="exampleFormControlFile1">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Email</label>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Email">
             </div>
             <input type="hidden" name="id" value=<?php echo $_GET['id'];?>>
             <input type="submit" name="update" value="Update">

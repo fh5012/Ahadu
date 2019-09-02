@@ -37,6 +37,8 @@ $img = null;
 $img1 = null;
 $Stages_id = null;
 $Category_id = null;
+$phone = null;
+$email = null;
 
 if (!empty($_POST)) {
     $name = $_POST['name'];
@@ -46,6 +48,8 @@ if (!empty($_POST)) {
     $Admin_id = $_POST['Admin_id'];
     $Stages_id = $_POST['Stages_id'];
     $Category_id =$_POST['Category_id'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
 
     $folder = "upload/img/";
 
@@ -104,12 +108,14 @@ if (!empty($_POST)) {
             $errors['img1'] = '\'not valid';
         }
         if (empty($errors)) {
-            $query = $DB_con->prepare('INSERT INTO product (name,price,color,storage,Admin_id,img,img1,Stages_id,Category_id) VALUES (:name, :price, :color, :storage, :Admin_id, :img, :img1,:Stages_id, :Category_id)');
+            $query = $DB_con->prepare('INSERT INTO product (name,price,color,storage,Admin_id,img,img1,phone,email,Stages_id,Category_id) VALUES (:name, :price, :color, :storage, :Admin_id, :phone, :email,:img, :img1, :Stages_id, :Category_id)');
             $query->bindParam(':name', $name);
             $query->bindParam(':price', $price);
             $query->bindParam(':color', $color);
             $query->bindParam(':storage', $storage);
             $query->bindParam(':Admin_id', $Admin_id);
+            $query->bindParam(':phone', $phone );
+            $query->bindParam(':email', $email );
             $query->bindParam(':img', $img);
             $query->bindParam(':img1', $img1);
             $query->bindParam(':Stages_id', $Stages_id);
@@ -213,6 +219,14 @@ if (!empty($_POST)) {
                 <label for="exampleFormControlFile1">Image</label>
                 <input type="file" class="form-control-file" name="img" id="exampleFormControlFile1">
                 <input type="file" class="form-control-file" name="img1" id="exampleFormControlFile1">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Email</label>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Email">
             </div>
             <input type="submit" name="submit" value="Add Product" />
 
