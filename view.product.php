@@ -18,12 +18,15 @@ while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
   $name = $row['name'];
   $img = $row['img'];
   $img1 = $row['img1'];
-  $phone = $row['phone'];
-  $email = $row['email'];
+  $phone = $row['Phone'];
+  $email = $row['Email'];
 }
-var_dump($img1);
-var_dump($img);
+// var_dump($img1);
+// var_dump($img);
 ?>
+<ul class="nav nav-tabs nav-justified">
+<a href ="user.php"><div class="p-3 mb-2 bg-dark text-white">Home</div></a>
+</ul>
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -58,10 +61,10 @@ var_dump($img);
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <i class="fas fa-envelope"> E-mail:<?php echo $email ?></i>
+      <i class="fas fa-envelope"> E-mail: <?php echo $email ?></i>
     </div>
     <div class="col-md-6">
-      <i class="fas fa-mobile-alt"> Call:<?php echo $phone ?></i>
+      <i class="fas fa-mobile-alt"> Call: <?php echo $phone ?></i>
     </div>
   </div>
 </div>

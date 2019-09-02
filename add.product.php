@@ -48,8 +48,8 @@ if (!empty($_POST)) {
     $Admin_id = $_POST['Admin_id'];
     $Stages_id = $_POST['Stages_id'];
     $Category_id =$_POST['Category_id'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
+    $phone = $_POST['Phone'];
+    $email = $_POST['Email'];
 
     $folder = "upload/img/";
 
@@ -222,11 +222,11 @@ if (!empty($_POST)) {
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Phone</label>
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+                <input type="text" class="form-control" id="phone" name="Phone" placeholder="Phone">
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Email</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                <input type="text" class="form-control" id="email" name="Email" placeholder="Email">
             </div>
             <input type="submit" name="submit" value="Add Product" />
 

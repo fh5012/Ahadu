@@ -183,8 +183,8 @@ while($row = $query->fetch(PDO::FETCH_ASSOC))
     $Category_id =$row['Category_id'];
     $img = $row['img'];
     $img1 = $row['img1'];
-    $phone = $row['phone'];
-    $email = $row['email'];
+    $phone = $row['Phone'];
+    $email = $row['Email'];
 }
 ?>
     <div class="container">
