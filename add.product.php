@@ -37,8 +37,8 @@ $img = null;
 $img1 = null;
 $Stages_id = null;
 $Category_id = null;
-$phone = null;
-$email = null;
+$Phone = null;
+$Email = null;
 
 if (!empty($_POST)) {
     $name = $_POST['name'];
@@ -48,8 +48,8 @@ if (!empty($_POST)) {
     $Admin_id = $_POST['Admin_id'];
     $Stages_id = $_POST['Stages_id'];
     $Category_id =$_POST['Category_id'];
-    $phone = $_POST['Phone'];
-    $email = $_POST['Email'];
+    $Phone = $_POST['Phone'];
+    $Email = $_POST['Email'];
 
     $folder = "upload/img/";
 
@@ -108,14 +108,14 @@ if (!empty($_POST)) {
             $errors['img1'] = '\'not valid';
         }
         if (empty($errors)) {
-            $query = $DB_con->prepare('INSERT INTO product (name,price,color,storage,Admin_id,img,img1,phone,email,Stages_id,Category_id) VALUES (:name, :price, :color, :storage, :Admin_id, :phone, :email,:img, :img1, :Stages_id, :Category_id)');
+            $query = $DB_con->prepare('INSERT INTO product (name,price,color,storage,Admin_id,img,img1,Phone,Email,Stages_id,Category_id) VALUES (:name, :price, :color, :storage, :Admin_id, :img, :img1, :Phone, :Email, :Stages_id, :Category_id)');
             $query->bindParam(':name', $name);
             $query->bindParam(':price', $price);
             $query->bindParam(':color', $color);
             $query->bindParam(':storage', $storage);
             $query->bindParam(':Admin_id', $Admin_id);
-            $query->bindParam(':phone', $phone );
-            $query->bindParam(':email', $email );
+            $query->bindParam(':Phone', $Phone);
+            $query->bindParam(':Email', $Email);
             $query->bindParam(':img', $img);
             $query->bindParam(':img1', $img1);
             $query->bindParam(':Stages_id', $Stages_id);
@@ -196,7 +196,14 @@ if (!empty($_POST)) {
                 <label for=",exampleFormControlSelect1">Condition</label>
                 <select class="form-control" name="Stages_id" id="exampleFormControlSelect1">
                     <?php foreach ($stages as $stage) { ?>
-                        <option><?php echo $stage['id']; ?></option>
+                        <option><?php echo $stage['id']; 
+                        if ($stage['id'] === '1') {
+                            echo "<li class='d-block p-2 bg-dark text-white'>- NEW </li>";
+                        }else{
+                            echo '- USED';
+                        }
+                        ?>
+                        </option>
                     <?php } ?>
                 </select>
             </div>
@@ -208,17 +215,25 @@ if (!empty($_POST)) {
             ?>
 
             <div class="form-group">
-                <label for=",exampleFormControlSelect1">Category</label>
+                <label for="exampleFormControlSelect1">Category</label>
                 <select class="form-control" name="Category_id" id="exampleFormControlSelect1">
                 <?php foreach ($categorys as $category) { ?>
-                        <option><?php echo $category['id']; ?></option>
+                        <option><?php echo $category['id']; 
+                        if ($category['id'] === '1') {
+                            echo "<li class='d-block p-2 bg-dark text-white'>- Mobile </li>";
+                        }
+                        if ($category['id'] === '2') {
+                            echo "<li class='d-block p-2 bg-dark text-white'>- TV </li>";
+                        }
+                        ?>
+                        </option>
                     <?php } ?>
                 </select>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlFile1">Image</label>
-                <input type="file" class="form-control-file" name="img" id="exampleFormControlFile1">
-                <input type="file" class="form-control-file" name="img1" id="exampleFormControlFile1">
+                <input type="file" class="form-control-file" name="img" value="<?php echo $img;?>" id="exampleFormControlFile1">
+                <input type="file" class="form-control-file" name="img1" value="<?php echo $img1;?>" id="exampleFormControlFile1">
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Phone</label>
@@ -226,7 +241,7 @@ if (!empty($_POST)) {
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Email</label>
-                <input type="text" class="form-control" id="email" name="Email" placeholder="Email">
+                <input type="text" class="form-control" id="email" name="Email" value ="<?php echo $_SESSION['email'];?>" placeholder="Email">
             </div>
             <input type="submit" name="submit" value="Add Product" />
 

@@ -123,7 +123,7 @@ if (!empty($_POST)) {
             $errors['img1'] = '\'not valid';
         }
         if (empty($errors)) {
-            $sql = "UPDATE product SET name=:name, price=:price, email=:email, phone=:phone, color=:color, storage=:storage, Admin_id=:Admin_id, img=:img,img1=:img1, Stages_id=:Stages_id, Category_id=:Category_id WHERE id=:id";
+            $sql = "UPDATE product SET name=:name, price=:price, email=:email, phone=:phone, color=:color, storage=:storage, Admin_id=:Admin_id, img=:img, img1=:img1, Stages_id=:Stages_id, Category_id=:Category_id WHERE id=:id";
             $query = $DB_con->prepare($sql);
             $query->bindparam(':id', $id);
             $query->bindparam(':name', $name);
