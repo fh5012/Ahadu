@@ -225,6 +225,12 @@ if (!empty($_POST)) {
                         if ($category['id'] === '2') {
                             echo "<li class='d-block p-2 bg-dark text-white'>- TV </li>";
                         }
+                        if ($category['id'] === '3') {
+                            echo "<li class='d-block p-2 bg-dark text-white'>- PS4 </li>";
+                        }
+                        if ($category['id'] === '4') {
+                            echo "<li class='d-block p-2 bg-dark text-white'>- X-BOX </li>";
+                        }
                         ?>
                         </option>
                     <?php } ?>
