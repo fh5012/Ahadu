@@ -37,10 +37,10 @@ while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-black w-50" src="upload/img/<?php echo $img ?>" alt="<?php echo $name = $row['name']; ?>">
+          <img class="d-black w-100" src="upload/img/<?php echo $img ?>" alt="<?php echo $name = $row['name']; ?>" style="height:auto;  width:auto;">
         </div>
         <div class="carousel-item">
-          <img class="d-black w-50" src="upload/img/<?php echo $img1 ?>" alt="<?php echo $name = $row['name']; ?>">
+          <img class="d-black w-100" src="upload/img/<?php echo $img1 ?>" alt="<?php echo $name = $row['name']; ?>" style="height:auto;  width:auto;">
         </div>
         <!-- <div class="carousel-item">
       <img class="d-block w-100" src="..." alt="Third slide">

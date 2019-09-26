@@ -8,8 +8,9 @@ include_once("base.php");
     <div class="header">
         <div class="logo">
             <?php
-            if ($title == 'Admin'|| $title == 'Catagory' || $title == 'Random'|| $title == 'Add Product' || $title =='Edit Product') { ?>
-                <a href="admin.php"><?php } ?><img src="https://i.pinimg.com/originals/3d/57/61/3d5761e18cec2a7a8ce99054b7770e1b.jpg"></a>
+            if ($title == 'Admin'|| $title == 'Catagory' || $title == 'Random'|| $title == 'Add Product' || $title =='Edit Product');
+                echo '<a href="admin.php"><img src="https://i.pinimg.com/originals/3d/57/61/3d5761e18cec2a7a8ce99054b7770e1b.jpg" alt="logo-img"></a>';
+               ?>
         </div>
         <div class="mx-auto text-center">
             <h1 class="" style="margin-top: -57px;"><?php echo $title; ?></h1>
@@ -77,4 +78,3 @@ include_once("base.php");
 </nav>
     <?php } ?>
 
-<?php include_once('footer.php');?>

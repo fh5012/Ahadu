@@ -237,7 +237,7 @@ if (!empty($_POST)) {
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Phone</label>
-                <input type="text" class="form-control" id="phone" name="Phone" placeholder="Phone">
+                <input type="text" class="form-control" id="phone" name="Phone" value ="+251 " placeholder="Phone">
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Email</label>

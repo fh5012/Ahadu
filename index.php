@@ -18,21 +18,16 @@ require_once('./Include/inc.user.php');
                     <form action="#" method="POST" enctype="multipart/form-data">
                         <div class="form-label-group">
                             <input type="text" name="email" class="form-control" placeholder="Votre identifiant" required autofocus>
-                            <label for="inputEmail">Email address</label>
+                            <label for="email">Email address</label>
                         </div>
 
                         <div class="form-label-group">
                             <input type="password" name="password" class="form-control" placeholder="Votre mot de passe" />
-                            <label for="inputPassword">Password</label>
-                        </div>
-
-                        <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" value="1" class="custom-control-input" id="customCheck1">
-                            <label class="custom-control-label" for="customCheck1">Remember password</label>
+                            <label for="password">Password</label>
                         </div>
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" name="submit" value="submit">Sign in</button>
                         <hr class="my-4">
-                        <a href ="register.php"><button class="btn btn-lg btn-warning btn-block text-uppercase" type="button"><i class="fas fa-sign-in-alt px-2"></i>register with new account</button></a>
+                        <button onclick="window.location.href = 'register.php';" class="btn btn-lg btn-warning btn-block text-uppercase" type="button"><i class="fas fa-sign-in-alt px-2"></i>register with new account</button>
                         <button onclick="window.location.href = 'random.php';" class="btn btn-lg btn-info btn-block text-uppercase" type="button"><i class="fas fa-running px-2"></i>continue without login</button>
                     </form>
                 </div>
@@ -40,6 +35,3 @@ require_once('./Include/inc.user.php');
         </div>
     </div>
 </div>
-</body>
-
-</html>

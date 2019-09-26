@@ -267,7 +267,7 @@ while($row = $query->fetch(PDO::FETCH_ASSOC))
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Email</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                <input type="text" class="form-control" id="email" name="Email" value ="<?php echo $_SESSION['email'];?>" placeholder="Email">
             </div>
             <input type="hidden" name="id" value=<?php echo $_GET['id'];?>>
             <input type="submit" name="update" value="Update">
